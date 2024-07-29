@@ -1,0 +1,108 @@
+<html>
+  {% extends 'base.html' %} {% block pagetitle %} AI Engine {% endblock
+  pagetitle %} {% block body %}
+  <style>
+    .custom-file {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mt-4{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;
+    }
+  </style>
+  <div>
+    <div class="container">
+      <!-- For demo purpose -->
+      <div class="row mb-5 text-center text-white">
+        <div class="col-lg-10 mx-auto">
+          <h1
+            class="display-4"
+            style="padding-top: 2%; font-weight: bold; color: rgb(4, 54, 4)"
+          >
+            <b>DISEASE DETECTION</b>
+          </h1>
+          <p class="lead" style="font-weight: 500; color: black">
+            Let AI Engine Will Help You To Detect Disease
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mx-auto">
+          <div class="p-5 bg-white shadow rounded-lg" style="height: 95%">
+            <img
+              src="https://www.pngjoy.com/pngl/250/4840262_plants-png-indoors-tropical-plant-png-hd-png.png "
+              height="300"
+              alt=""
+              width="200"
+              class="d-block mx-auto mb-4 rounded-pill"
+            />
+
+            <!-- Default bootstrap file upload-->
+
+            <form action="/submit" method="POST" enctype="multipart/form-data">
+              <div class="custom-file overflow-hidden mb-4">
+                <input type="file" id="actual-btn" hidden name="image" />
+                <label for="actual-btn">Choose File</label>
+                <span id="file-chosen">No file chosen</span>
+              </div>
+
+              <!-- End -->
+
+              <h6 class="text-center mb-4 text-muted">
+                Simply upload your plant's leaf image and then see the magic of
+                AI.
+              </h6>
+
+              <div>
+                <!-- Your existing HTML content -->
+
+                <div class="mt-4">
+
+                  <img
+                    id="preview-image"
+                    alt="Selected Image"
+                    style="max-width: 100%; height: auto"
+                  />
+                </div>
+              </div>
+
+              <!-- Custom bootstrap upload file-->
+              <center>
+                <a class="mx-2"
+                  ><button type="submit" class="btn btn-outline-success">
+                    Submit
+                  </button></a
+                >
+              </center>
+            </form>
+            <!-- End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const actualBtn = document.getElementById("actual-btn");
+    const fileChosen = document.getElementById("file-chosen");
+    const previewImage = document.getElementById("preview-image");
+
+    actualBtn.addEventListener("change", function () {
+      const file = this.files[0];
+      fileChosen.textContent = file.name;
+
+      // Display the selected image preview
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+  {% endblock body %}
+</html>
